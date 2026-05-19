@@ -139,10 +139,15 @@ class Main :
                 if Score == 0:
                     print("Womp Womp Chump!")
                 else:
-                    g=open("History Saved Scores.txt","at")
-                    g.write(f"{Name} : {Score}\n")
-                    g.close()
-                    print("See ya later!")
+                    with open("History Saved Scores.txt","at") as f:
+                        f.write(f"{Name} : {Score}\n")
+                    #sort the scores in the file as well as correctly sorting in the new score
+                    with open("History Saved Scores.txt","rt") as f:
+                        lines = f.readlines()
+                        lines.sort(key=lambda x: int(x.split(":")[1].strip()), reverse=True)
+                    with open("History Saved Scores.txt","wt") as f:
+                        f.writelines(lines)
+                    print("Score saved! See ya later!")
                 q=input("Please press enter to close program")
             case _:
                 print("Yikers. Pick 1 or 2")
