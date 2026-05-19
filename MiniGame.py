@@ -12,17 +12,17 @@ class Main :
     operatingSystem = os.name.lower()
     
     def OperatingCommand(command):
-        if command == Clear:
+        if command == "Clear":
             if (operatingSystem == "posix"):
-                os.system('clear')
+                os.system("Clear")
             else:
                 os.system('cls')
             
     def quit(Name,Score):
-        Main.OperatingCommand(Clear)
+        Main.OperatingCommand("Clear")
         choice = input("Would you like to quit?").lower()
         if choice == "y" or choice == "yes":
-            print("exiting Program")
+            print("Starting emergency exit Program")
             os.system('exit')
         elif choice == "n" or choice == "no":
             print("Ok let me put you back to where you are")
@@ -40,54 +40,59 @@ class Main :
         print("5. I Own This Game! (+13)")
         print("_____________________________________________________________________")
         difficulty=(input("Please enter the number of the desired difficulty: "))
+        
         if difficulty == "q" or difficulty == "quit":
             Main.quit(Name, Score)
-        else:
-            difficulty=int(difficulty)
-            X=0
-            Y=0
-            if difficulty == 1:
+        
+        difficulty=int(difficulty)
+        X=0
+        Y=0
+        match difficulty:
+
+            case 1:
                 X=random.randint(1,25)
                 Y=random.randint(1,25)
-                Reward=1
-            elif difficulty == 2:
+                Reward=3
+            case 2:
                 X=random.randint(26,99)
                 Y=random.randint(26,99)
-                Reward=2
-            elif difficulty == 3:
+                Reward=5
+            case 3:
                 X=random.randint(100,249)
                 Y=random.randint(100,249)
-                Reward=5
-            elif difficulty == 4:
+                Reward=8
+            case 4:
                 X=random.randint(250,499)
                 Y=random.randint(250,499)
-                Reward=8
-            elif difficulty == 5:
+                Reward=13
+            case 5:
                 X=random.randint(500,1000)
                 Y=random.randint(500,1000)
-                Reward=13
-            else:
+                Reward=21
+            case _:
                 print("Lets try this again")
                 Main.Calculator(Name, Score)
-        Main.OperatingCommand(Clear)
+        
+        Main.OperatingCommand("Clear")
         Mode = random.randint(1,4)
-        if Mode == 1:
-            Total=Y+X
-            symbol="+"
-        elif  Mode == 2:
-            Total=Y-X
-            symbol="-"
-        elif Mode == 3:
-            Total=Y*X
-            symbol="*"
-        elif Mode == 4:
-            Total=round(Y/X,1)
-            symbol="/"
-        else:
-            print("Thats it")
-            Main.Calculator(Name, Score)
+        match Mode:
+            case 1:
+                Total=Y+X
+                symbol="+"
+            case 2:
+                Total=Y-X
+                symbol="-"
+            case 3:
+                Total=Y*X
+                symbol="*"
+            case 4:
+                Total=round(Y/X,1)
+                symbol="/"
+            case _:
+                print("Thats it")
+                Main.Calculator(Name, Score)
 
-        Main.OperatingCommand(Clear)
+        Main.OperatingCommand("Clear")
         Guess= input(f"What does {Y} {symbol} {X} = ? :\t")
         time.sleep(2)
         if Guess == "quit" or Guess == "q":
@@ -117,7 +122,7 @@ class Main :
         Huh=int(input("Go another round and risk it for more points? \n1. I'm no Chump!\n2. Spare Me!\n"))
         time.sleep(2)
         if Huh == 1:
-            Main.OperatingCommand(Clear)
+            Main.OperatingCommand("Clear")
             print("Youve got the spunk kid!\n")
             Main.Calculator(Name,Score)
         elif Huh == 2:
@@ -131,7 +136,7 @@ class Main :
         else:
             print("Yikers. Pick 1 or 2")
             Main.Replay(Name,Score)
-Main.OperatingCommand(Clear)
+Main.OperatingCommand("Clear")
 print("Version 2.0")
 Player1=input("What is your name before we begin:\n")
 print(f"Hello, {Player1}!\n")
