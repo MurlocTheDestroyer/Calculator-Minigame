@@ -18,4 +18,4 @@ def generate_scores():
             lines.sort(key=lambda x: int(x.split(":")[1].strip()), reverse=True)
         with open("History Saved Scores.txt","wt") as f:
             f.writelines(lines)
-        return(print("Welcome new player!\nGeneric Saved Scores have been generated in the newly created file (History Saved Scores.txt)"))
+        return(print("\nWelcome new player!\nGeneric Saved Scores have been generated in the newly created file (History Saved Scores.txt)\n"))
