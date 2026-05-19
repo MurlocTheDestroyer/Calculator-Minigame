@@ -1,19 +1,25 @@
 import random
 import os
 import time
+
 class Main :
+    
     def __init__(self,Name,Score):
         self.Name = Name
         self.Score = Score
-
-    def ClearScreen ():
-        if (os.name.lower() == "posix"):
-            return (os.system('clear'))
-        else:
-            return (os.system('cls'))
         
+    global operatingSystem
+    operatingSystem = os.name.lower()
+    
+    def OperatingCommand(command):
+        if command == Clear:
+            if (operatingSystem == "posix"):
+                os.system('clear')
+            else:
+                os.system('cls')
+            
     def quit(Name,Score):
-        Main.ClearScreen()
+        Main.OperatingCommand(Clear)
         choice = input("Would you like to quit?").lower()
         if choice == "y" or choice == "yes":
             print("exiting Program")
@@ -21,6 +27,8 @@ class Main :
         elif choice == "n" or choice == "no":
             print("Ok let me put you back to where you are")
             Main.Calculator(Name,Score)
+        else:
+            print("Bro make a choice 1 or 2")
 
     def Calculator(Name, Score):
         print("\t\tThe Bestest Coolest Difficulty Meter Of All Time!")
@@ -61,7 +69,7 @@ class Main :
             else:
                 print("Lets try this again")
                 Main.Calculator(Name, Score)
-        Main.ClearScreen()
+        Main.OperatingCommand(Clear)
         Mode = random.randint(1,4)
         if Mode == 1:
             Total=Y+X
@@ -75,12 +83,11 @@ class Main :
         elif Mode == 4:
             Total=round(Y/X,1)
             symbol="/"
-        
         else:
             print("Thats it")
             Main.Calculator(Name, Score)
 
-        Main.ClearScreen()
+        Main.OperatingCommand(Clear)
         Guess= input(f"What does {Y} {symbol} {X} = ? :\t")
         time.sleep(2)
         if Guess == "quit" or Guess == "q":
@@ -107,10 +114,10 @@ class Main :
         else:
             print(f"{Name} has a total of {Score} points!\n")
         time.sleep(2)
-        Huh=int(input("Go another round and risk it for more points? \n1. I'm no Chump!\n2. Spare Me!\n Your Choice: "))
+        Huh=int(input("Go another round and risk it for more points? \n1. I'm no Chump!\n2. Spare Me!\n"))
         time.sleep(2)
         if Huh == 1:
-            Main.ClearScreen()
+            Main.OperatingCommand(Clear)
             print("Youve got the spunk kid!\n")
             Main.Calculator(Name,Score)
         elif Huh == 2:
@@ -124,8 +131,8 @@ class Main :
         else:
             print("Yikers. Pick 1 or 2")
             Main.Replay(Name,Score)
-Main.ClearScreen()
-print("Version 2.3")
+Main.OperatingCommand(Clear)
+print("Version 2.0")
 Player1=input("What is your name before we begin:\n")
 print(f"Hello, {Player1}!\n")
 time.sleep(3)
