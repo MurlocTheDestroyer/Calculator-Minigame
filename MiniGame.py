@@ -1,7 +1,8 @@
 import random
 import os
 import time
-
+import NewPlayerConfig as NPC
+#^ haha get it? I imported the function that generates the scores for new players and they are non playable characters. I am so funny.
 class Main :
     
     def __init__(self,Name,Score):
@@ -18,10 +19,10 @@ class Main :
                     os.system("Clear")
                 case _:
                     os.system('cls')
-            
+    
     def quit(Name,Score):
         Main.OperatingCommand("Clear")
-        choice = input("Would you like to quit? ").lower()
+        choice = input("Are you sure you would like to quit?\n(If you do, your score will not be saved)\n(y/n): ").lower()
         match choice:
             case "y" | "yes":
                 print("Starting emergency exit Program")
@@ -100,7 +101,7 @@ class Main :
                     Main.Calculator(Name, Score)
 
             Main.OperatingCommand("Clear")
-            Guess= input(f"What does {X} {Mode} {Y} = ? :\t")
+            Guess = input(f"What does {X} {Mode} {Y} = ? :\t")
             time.sleep(2)
             try:
                 if Mode == "/":
@@ -128,33 +129,46 @@ class Main :
         else:
             print(f"{Name} has a total of {Score} points!\n")
         time.sleep(1)
-        rematch=int(input("Go another round and risk it for more points? \n1. I'm no Chump!\n2. Spare Me!\n"))
-        time.sleep(1)
-        match rematch:
-            case 1:
-                Main.OperatingCommand("Clear")
-                print("Youve got the spunk kid!\n")
-                Main.Calculator(Name,Score)
-            case 2:
-                if Score == 0:
-                    print("Womp Womp Chump!")
-                else:
-                    with open("History Saved Scores.txt","at") as f:
-                        f.write(f"{Name} : {Score}\n")
-                    #sort the scores in the file as well as correctly sorting in the new score
-                    with open("History Saved Scores.txt","rt") as f:
-                        lines = f.readlines()
-                        lines.sort(key=lambda x: int(x.split(":")[1].strip()), reverse=True)
-                    with open("History Saved Scores.txt","wt") as f:
-                        f.writelines(lines)
-                    print("Score saved! See ya later!")
-                q=input("Please press enter to close program")
-            case _:
-                print("Yikers. Pick 1 or 2")
-                Main.Replay(Name,Score)
+        rematch=input("Go another round and risk it for more points? \n1. I'm no Chump!\n2. Spare Me!\n")
+        try:
+            rematch=int(rematch)
+        except ValueError:
+            print("Get load of this guy. He cant even pick 1 or 2. Lets try this again")
+            Main.Replay(Name,Score)
+        else:
+            time.sleep(1)
+            match rematch:
+                case 1:
+                    Main.OperatingCommand("Clear")
+                    print("Youve got the spunk kid!\n")
+                    Main.Calculator(Name,Score)
+                case 2:
+                    if Score == 0:
+                        print("Womp Womp Chump!")
+                    else:
+                        with open("History Saved Scores.txt","at") as f:
+                            f.write(f"{Name} : {Score}\n")
+                        #sort the scores in the file as well as correctly sorting in the new score
+                        with open("History Saved Scores.txt","rt") as f:
+                            lines = f.readlines()
+                            lines.sort(key=lambda x: int(x.split(":")[1].strip()), reverse=True)
+                        with open("History Saved Scores.txt","wt") as f:
+                            f.writelines(lines)
+                        print("Score saved! See ya later!")
+                        print("Top 5 Scores:")
+                        with open("History Saved Scores.txt","rt") as f:
+                            for i in range(5):
+                                line = f.readline()
+                                if line:
+                                    print(line.strip())
+                    q=input("Please press enter to close program")
+                case _:
+                    print("Yikers. Pick 1 or 2")
+                    Main.Replay(Name,Score)
 Main.OperatingCommand("Clear")
-print("Version 2.2")
+print("Version 2.5")
 Player1=input("What is your name before we begin:\n")
 print(f"Hello, {Player1}!\n")
 time.sleep(2)
+NPC.generate_scores()
 Main.Calculator(Player1,0)
