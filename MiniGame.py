@@ -33,6 +33,7 @@ class Main :
                 print("Bro make a choice 1 or 2")
 
     def Calculator(Name, Score):
+        Symbols=["+","-","*","/"]
         print("\tThe Bestest Coolest Difficulty Meter Of All Time!\n" +
         "_____________________________________________________________________\n" +
         "\t1. Im too young to be losing! (+3)\n" +
@@ -78,29 +79,31 @@ class Main :
                     Main.Calculator(Name, Score)
             
             Main.OperatingCommand("Clear")
-            Mode = random.randint(1,4)
+            Mode = Symbols[random.randint(0,3)]
             match Mode:
-                case 1:
-                    Total=Y+X
-                    symbol="+"
-                case 2:
-                    Total=Y-X
-                    symbol="-"
-                case 3:
-                    Total=Y*X
-                    symbol="*"
-                case 4:
-                    Total=round(Y/X,1)
-                    symbol="/"
+                case "+":
+                    Total=X+Y
+                case "-":
+                    Total=X-Y
+                case "*":
+                    if Reward == 3:
+                        X = random.randint(1,12)
+                        Y = random.randint(1,12)
+                    Total=X*Y
+                case "/":
+                    if Reward == 3:
+                        X = random.randint(1,12)
+                        Y = random.randint(1,12)
+                    Total=round(X/Y,1)
                 case _:
                     print("Thats it")
                     Main.Calculator(Name, Score)
 
             Main.OperatingCommand("Clear")
-            Guess= input(f"What does {Y} {symbol} {X} = ? :\t")
+            Guess= input(f"What does {X} {Mode} {Y} = ? :\t")
             time.sleep(2)
             try:
-                if symbol == "/":
+                if Mode == "/":
                     Guess=float(Guess)
                 else:
                     Guess=int(Guess)
@@ -137,7 +140,8 @@ class Main :
                     print("Womp Womp Chump!")
                 else:
                     g=open("History Saved Scores.txt","at")
-                    g.write(f"{Name} : {Score}")
+                    g.write(f"{Name} : {Score}\n")
+                    g.close()
                     print("See ya later!")
                 q=input("Please press enter to close program")
             case _:
