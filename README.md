@@ -93,6 +93,12 @@ The file is kept sorted in descending order by score. A score of 0 is not saved.
  
 - Global leaderboard
 - Correct answer streak multiplier for continuous hard difficulty selections
+- Show your current score and questions answered during a round, not just at the end
+- Accuracy summary shown at cash-out (questions answered, questions wrong, accuracy %)
+- A win streak counter displayed during play so you can see how long your current run is
+- Possible introductions to newer modes of gameplay (Highscores scored will be separated from normal game modes highscores):
+- MAYBE: A sudden death variant where one wrong answer ends the game entirely with no second chance
+- MAYBE: Mixed difficulty mode that randomly cycles through all five levels each question
 ---
  
 ## Notes
