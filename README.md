@@ -99,12 +99,23 @@ The file is kept sorted in descending order by score. A score of 0 is not saved.
 - Accuracy summary shown at cash-out (questions answered, questions wrong, accuracy %)
 - A win streak counter displayed during play so you can see how long your current run is
 - Possible introductions to newer modes of gameplay (Highscores scored will be separated from normal game modes highscores):
-- MAYBE: A sudden death variant where one wrong answer ends the game entirely with no second chance
+- WIP: A sudden death variant where one wrong answer ends the game entirely with no second chance
 - MAYBE: Mixed difficulty mode that randomly cycles through all five levels each question
 
 ---
  
 ## Notes
- ## Beast Mode Beast Mode is a hidden escalating challenge triggered by a specific in-game sequence. Once active: - Difficulty is chosen automatically based on your current score — the higher your score, the harder the tier - Number ranges are significantly larger than normal mode at every tier - Correct answers earn **4× the normal point reward** for that tier - You cannot quit during Beast Mode - Reach 500 points to defeat the Beast and earn the title of **B3AST SL4Y3R**; your name is saved to `Slayer History.txt` - A wrong answer resets your score to 0 and ends Beast Mode
+### Beast Mode
 
-`time.sleep()` calls are intentional — they add brief pauses to improve readability during gameplay and prevent output from flashing past too quickly. The only file this program reads from or writes to is `History Saved Scores.txt`.
+Beast Mode is a hidden escalating challenge triggered by a specific in-game sequence. Once active:
+
+- Difficulty is chosen automatically based on your current score — the higher your score, the harder the tier
+- Number ranges are significantly larger than normal mode at every tier
+- Correct answers earn **4× the normal point reward** for that tier
+- You cannot quit during Beast Mode
+- Reach 500 points to defeat the Beast and earn the title of **B3AST SL4Y3R**; your name is saved to `Slayer History.txt`
+- A wrong answer resets your score to 0 and ends the program in a game loss
+
+---
+
+`time.sleep()` calls are intentional — they add brief pauses to improve readability during gameplay and prevent output from flashing past too quickly. The only files this program reads from or writes to is `History Saved Scores.txt` and `Slayer History.txt`.
