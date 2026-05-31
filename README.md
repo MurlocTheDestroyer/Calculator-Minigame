@@ -35,8 +35,8 @@ python MiniGame.py
 Each round you are shown an arithmetic problem. Type your answer and press Enter.
  
 - **Correct answer** → you earn points based on the difficulty level, then choose to keep going or cash out
-- **Wrong answer** → your score resets to zero and you get another chance
-- **Cashing out** → your score is saved to the leaderboard and the top 5 scores are displayed
+- **Wrong answer** → your score resets to zero and you get another chance (unless BeastMode is Activated then you lose)
+- **Cashing out** → your score is saved to the leaderboard and the top 10 scores are displayed
 - **Quitting mid-game** (`q` or `quit`) → you exit without saving your score
 ---
  
@@ -50,7 +50,7 @@ Each round you are shown an arithmetic problem. Type your answer and press Enter
 | 4 | Watch me lose! | 250 – 499 | +13 |
 | 5 | I Own This Game! | 500 – 1000 | +21 |
  
-> **Note:** For difficulty 1, multiplication and division use smaller numbers (1–12) to keep results manageable.
+> **Note:** For difficulty 1, multiplication and division use smaller numbers (1–12) to keep results manageable. Division answers are rounded to the nearest tenth
  
 ---
  
@@ -59,7 +59,7 @@ Each round you are shown an arithmetic problem. Type your answer and press Enter
 ```
 Calculator-Minigame/
 ├── MiniGame.py              # Main game logic
-├── NewPlayerConfig.py       # Generates starter leaderboard for new players
+├── Slayer History.txt       #Created automatically when a player earns B3AST SL4Y3R
 ├── History Saved Scores.txt # Created automatically on first run
 └── README.md
 ```
@@ -70,10 +70,12 @@ Contains the `Main` class with three core methods:
  
 - `Calculator(Name, Score)` — presents a difficulty menu, generates a random problem, checks the answer, and updates the score
 - `Replay(Name, Score)` — asks whether to continue or cash out, handles saving the score and displaying the leaderboard
-- `quit(Name, Score)` — confirms before exiting without saving
-### `NewPlayerConfig.py`
- 
-On first launch, creates `History Saved Scores.txt` and populates it with five randomly generated scores from a pool of placeholder names. This runs automatically; no action is required from the player.
+- `quit(Name, Score, BeastMode, BeastCounter)` — confirms before exiting without saving
+- `ActivatedBeastMode(Name, Score, BeastMode, BeastCounter)` — runs the Beast Mode question loop with scaled difficulty tiers and 4× point multipliers
+- `BeastReplay(Name, Score, BeastMode, BeastCounter)` — handles win/loss/continue outcomes during Beast Mode
+- `WinnerZone(Name)` — awards the B3AST SL4Y3R title and writes to `Slayer History.txt`
+- `generate_scores()` — creates `History Saved Scores.txt` and populates it with five random starter scores on first run
+- `OperatingCommand(command)` — clears the terminal on both Windows and Unix/macOS
  
 ---
  
@@ -99,8 +101,10 @@ The file is kept sorted in descending order by score. A score of 0 is not saved.
 - Possible introductions to newer modes of gameplay (Highscores scored will be separated from normal game modes highscores):
 - MAYBE: A sudden death variant where one wrong answer ends the game entirely with no second chance
 - MAYBE: Mixed difficulty mode that randomly cycles through all five levels each question
+
 ---
  
 ## Notes
- 
+ ## Beast Mode Beast Mode is a hidden escalating challenge triggered by a specific in-game sequence. Once active: - Difficulty is chosen automatically based on your current score — the higher your score, the harder the tier - Number ranges are significantly larger than normal mode at every tier - Correct answers earn **4× the normal point reward** for that tier - You cannot quit during Beast Mode - Reach 500 points to defeat the Beast and earn the title of **B3AST SL4Y3R**; your name is saved to `Slayer History.txt` - A wrong answer resets your score to 0 and ends Beast Mode
+
 `time.sleep()` calls are intentional — they add brief pauses to improve readability during gameplay and prevent output from flashing past too quickly. The only file this program reads from or writes to is `History Saved Scores.txt`.
