@@ -104,8 +104,7 @@ The file is kept sorted in descending order by score. A score of 0 is not saved.
 
 ---
  
-## Notes
-### Beast Mode
+## Beast Mode
 
 Beast Mode is a hidden escalating challenge triggered by a specific in-game sequence. Once active:
 
@@ -117,5 +116,7 @@ Beast Mode is a hidden escalating challenge triggered by a specific in-game sequ
 - A wrong answer resets your score to 0 and ends the program in a game loss
 
 ---
+
+## Notes
 
 `time.sleep()` calls are intentional — they add brief pauses to improve readability during gameplay and prevent output from flashing past too quickly. The only files this program reads from or writes to is `History Saved Scores.txt` and `Slayer History.txt`.
